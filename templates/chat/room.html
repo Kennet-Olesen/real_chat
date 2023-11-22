@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block base %}
+<h2>{{ name }}</h2>
+<div hx-ws="connect:/chat/{{ slug }}/">
+    <form hx-ws="send:submit">
+        <input class="form-control form-control-sm" name="message" placeholder="skriv din besked">
+        <input type="submit" name="send" value="Send">
+    </form>
+</div>
+<div id='messages'></div>
+{% endblock %}
