@@ -2,6 +2,7 @@
 {% load django_bootstrap5 %}
 {% block base %}
 <h2>{{ name }}</h2>
+<p>Room ID: {{ slug }}</p>
 <div hx-ws="connect:/chat/{{ slug }}/">
     <form hx-ws="send:submit">
         <input class="form-control form-control-sm" name="message" placeholder="skriv din besked">
