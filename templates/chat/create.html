@@ -3,7 +3,8 @@
 {% block base %}
 <form method='post' action='{% url 'room-create' %}'>
     {% csrf_token %}
+    <h2>Creating a room</h2>
     <input name='room_name' id='room_name' placeholder='Room Name'>
-    <input type='submit' id="submit">
+    <input type='submit' id="submit" value='Create'>
 </form>
 {% endblock %}
