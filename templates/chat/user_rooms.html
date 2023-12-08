@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block base %}
+<h1>Your Created Rooms</h1>
+<ul>
+    {% for room in user_created_rooms %}
+    <li><a href="{% url 'chat' slug=room.slug %}">{{ room.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

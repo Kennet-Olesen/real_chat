@@ -6,9 +6,12 @@ class Room(models.Model):
     name = models.CharField(max_length=128)
     slug = models.SlugField(unique=True)
     users = models.ManyToManyField(User)
+    creator = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="created_rooms"
+    )
 
     def __str__(self):
-        return self.name
+        return f"{self.name} (Created by: {self.creator.username})"
 
 
 class Message(models.Model):

@@ -18,7 +18,7 @@ def room_create(request):
         room_name = request.POST["room_name"]
         uid = str("".join(random.choices(string.ascii_letters + string.digits, k=4)))
         room_slug = slugify(room_name + "_" + uid)
-        room = Room.objects.create(name=room_name, slug=room_slug)
+        room = Room.objects.create(name=room_name, slug=room_slug, creator=request.user)
         return redirect(reverse("chat", kwargs={"slug": room.slug}))
     else:
         return render(request, "chat/create.html")
@@ -32,3 +32,11 @@ def room_join(request):
         return redirect(reverse("chat", kwargs={"slug": room.slug}))
     else:
         return render(request, "chat/join.html")
+
+
+@login_required
+def user_rooms(request):
+    user_created_rooms = Room.objects.filter(creator=request.user)
+    return render(
+        request, "chat/user_rooms.html", {"user_created_rooms": user_created_rooms}
+    )
